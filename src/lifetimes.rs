@@ -13,7 +13,7 @@ impl<'haystack, 'delimiter> StrSplit<'haystack, 'delimiter> {
     }
 }
 
-impl<'haystack, 'delimiter> Iterator for StrSplit<'haystack, 'delimiter> {
+impl<'haystack> Iterator for StrSplit<'haystack, '_> {
     type Item = &'haystack str;
     fn next(&mut self) -> Option<Self::Item> {
         // if let Some(ref mut remainder) = self.remainder { // same as line below
@@ -31,7 +31,7 @@ impl<'haystack, 'delimiter> Iterator for StrSplit<'haystack, 'delimiter> {
     }
 }
 
-fn take_until<'haystack>(source: &'haystack str, c: &'_ char) -> &'haystack str {
+pub fn take_until<'haystack>(source: &'haystack str, c: &char) -> &'haystack str {
     // this string is going to be dealocated when this function returns
     // therefore we need to be able to distinguish between lifetime of the
     // 's' and the lifetime of the delimiter
