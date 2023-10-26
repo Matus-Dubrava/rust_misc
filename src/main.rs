@@ -1,16 +1,14 @@
-pub mod lifetimes;
+pub mod tree;
 
-use crate::lifetimes::StrSplit;
+use crate::tree::Tree;
 
 fn main() {
-    let input = "a b c d e";
-    let letters = StrSplit::new(input, " ");
-    for letter in letters {
-        println!("{}", letter);
+    let values = [10, 4, 5, 1, 20, 15, 25];
+    let mut tree = Tree::new();
+    for v in values {
+        if tree.insert(v).is_none() {
+            eprintln!("inserting duplicate value '{}'", v);
+        }
     }
-
-    dbg!(input.find(" "));
-    if let Some(delimiter) = input.find(" ") {
-        dbg!(&input[..delimiter]);
-    }
+    tree.traverse();
 }
